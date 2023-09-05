@@ -1,5 +1,7 @@
 package exListas;
 
+import exPOO.Funcionario;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,6 +12,8 @@ public class List01 {
         //Lista do tipo String e está sendo inicializada ArrayList
 
         List<String> list = new ArrayList<>();
+
+
 
         // Adicionando nomes da lista
         list.add("Maria");

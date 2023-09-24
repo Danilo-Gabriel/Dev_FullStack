@@ -6,6 +6,8 @@ public class Bubblesort {
 
     public static void main(String[] args) {
 
+        /*
+
         Random random = new Random();
         int[] vetor = new int[5];
 
@@ -43,6 +45,8 @@ public class Bubblesort {
             }
 
         }
+
+         */
 
     }
 

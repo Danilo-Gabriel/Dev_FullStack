@@ -1,4 +1,6 @@
-package Heranca.Entities;
+package heranca.entities;
+
+import heranca.entities.Employee;
 
 public class OutsourcedEmployee extends Employee {
 

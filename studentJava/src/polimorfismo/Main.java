@@ -1,4 +1,4 @@
-package Polimorfismo;
+package polimorfismo;
 
 public class Main {
 }

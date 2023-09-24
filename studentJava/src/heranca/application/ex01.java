@@ -1,7 +1,7 @@
-package Heranca.application;
+package heranca.application;
 
-import Heranca.Entities.Employee;
-import Heranca.Entities.OutsourcedEmployee;
+import heranca.entities.Employee;
+import heranca.entities.OutsourcedEmployee;
 
 import java.util.ArrayList;
 import java.util.List;

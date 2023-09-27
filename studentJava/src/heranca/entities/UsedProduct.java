@@ -1,4 +1,4 @@
-package Heranca.Entities;
+package heranca.entities;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;;

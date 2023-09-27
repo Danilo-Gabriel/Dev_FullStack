@@ -1,4 +1,4 @@
-package Heranca.Entities;
+package heranca.entities;
 
 public class ImportedProduct extends Product{
     private double customFee;

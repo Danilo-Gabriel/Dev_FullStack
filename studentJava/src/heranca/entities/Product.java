@@ -1,8 +1,9 @@
-package Heranca.Entities;
+package heranca.entities;
 
 public class Product {
 
     private String name;
+    private Double values;
 
     public Product(String name, Double values) {
         this.name = name;
@@ -24,8 +25,6 @@ public class Product {
     public void setValues(Double values) {
         this.values = values;
     }
-
-    private Double values;
 
     public String priceTag(){
         return "PRICE TAGS" + "/n" +

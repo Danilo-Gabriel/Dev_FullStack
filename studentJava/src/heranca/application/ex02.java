@@ -1,6 +1,8 @@
-package Heranca.application;
+package heranca.application;
 
-import Heranca.Entities.Product;
+import heranca.entities.ImportedProduct;
+import heranca.entities.Product;
+import heranca.entities.UsedProduct;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -13,7 +15,8 @@ public class ex02 {
     public static void main(String[] args) {
         Locale.setDefault(Locale.US);
         Scanner sc = new Scanner(System.in);
-        List<Product> productList = new ArrayList<>();
+
+        List<Product> ProductList = new ArrayList<>();
 
         System.out.println("Enter the number of products: ");
         int N = sc.nextInt();
@@ -29,14 +32,20 @@ public class ex02 {
             if (R == 'u'){
                 System.out.println("Manufacture date (DD/MM/YYYY)");
                 LocalDate date = LocalDate.parse(sc.next(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                ProductList.add(new UsedProduct(name, price, date));
+            } else if (R == 'i') {
+                System.out.println("Customs Fee: ");
+                double frete = sc.nextDouble();
+                ProductList.add(new ImportedProduct(name, price, frete));
+
+            } else {
+                ProductList.add(new Product(name, price));
             }
 
-
-
         }
-
-
-
+        for (Product x: ProductList) {
+            System.out.println(x.priceTag());
+        }
 
 
     }

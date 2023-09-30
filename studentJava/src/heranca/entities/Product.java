@@ -27,8 +27,8 @@ public class Product {
     }
 
     public String priceTag(){
-        return "PRICE TAGS" + "/n" +
-                "Nome: " + name + "/n"+
+        return "PRICE TAGS \n" +
+                "Nome: " + name + "\n"+
             "VAlOR: " + String.format("%.2f", values);
 
     }

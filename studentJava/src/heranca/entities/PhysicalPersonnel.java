@@ -16,4 +16,27 @@ public class PhysicalPersonnel extends TaxPayer {
     public void setGastosSaude(Double gastosSaude) {
         this.gastosSaude = gastosSaude;
     }
+    @Override
+    public double impostoApagar() {
+        double imposto = 0;
+        if (getAnnualIncome() < 20000.00) {
+
+            imposto = getAnnualIncome() * 0.15;
+
+            if(gastosSaude != 0){
+
+                imposto = imposto - (gastosSaude * 0.50);
+            }
+
+        }
+        if (getAnnualIncome() > 20000.00) {
+            imposto = getAnnualIncome() * 0.25;
+            if(gastosSaude != 0){
+
+                imposto = imposto - (gastosSaude * 0.50);
+            }
+        }
+        return imposto;
+    }
+
 }

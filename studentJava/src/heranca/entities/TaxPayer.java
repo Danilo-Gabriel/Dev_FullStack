@@ -26,7 +26,16 @@ public abstract class TaxPayer {
         this.annualIncome = annualIncome;
     }
 
-   public double TotalArrecado(){
-        return annualIncome +
-   }
+    public abstract double impostoApagar();
+
+    public double totalArrecado(){
+        return annualIncome;
+    }
+
+    public String toString(){
+        return "TAXES PAID \n" +
+                getName() + " $ "+ String.format("%.2f", impostoApagar());
+    }
 }
+
+

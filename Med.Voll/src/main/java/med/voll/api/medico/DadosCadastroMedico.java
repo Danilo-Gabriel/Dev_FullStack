@@ -10,11 +10,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 public record DadosCadastroMedico(
+
+
+        /*
+        ANOTAÇÕES PARA VALIDATION DE DADOS ANTES QUE SEJAM PASSADAS PARA O A ENTIDADE JPA QUE PASSARA PARA O BANCO;
+        */
        @NotBlank
         String nome,
         @NotBlank
         @Email
         String email,
+
+        @NotBlank
+        String telefone,
 
         @NotBlank
         @Pattern(regexp = "\\d{4,6}")

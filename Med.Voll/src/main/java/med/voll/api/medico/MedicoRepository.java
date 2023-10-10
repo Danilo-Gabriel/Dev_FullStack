@@ -1,8 +1,13 @@
 package med.voll.api.medico;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.Optional;
+
 public interface MedicoRepository extends JpaRepository<Medico, Long> {
+    Page<Medico> findAllByAtivoTrue(Pageable paginacao);
 
     /*
     A interface MedicoRepository que você está mostrando é uma interface de repositório definida em um projeto que usa o Spring Data JPA. Ela estende a interface JpaRepository do Spring Data JPA e é usada para realizar operações de consulta e manipulação no banco de dados relacionado à entidade Medico.

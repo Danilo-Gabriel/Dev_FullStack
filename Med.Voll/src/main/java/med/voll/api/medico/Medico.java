@@ -31,6 +31,7 @@ usada com bancos de dados que suportam autoincremento.
     private String email;
     private String crm;
     private String telefone;
+    private Boolean ativo;
 
     @Enumerated(EnumType.STRING)
     private Especialidade especialidade;
@@ -44,8 +45,10 @@ usada com bancos de dados que suportam autoincremento.
         this.telefone  = dados.telefone();
         this.crm = dados.crm();
         this.especialidade = dados.especialidade();
-        this.endereco = new Endereco(dados.endereco()); //TIPO ENDERENÇO PASSAR DADOS ENDEREÇO
+        this.endereco = new Endereco(dados.endereco());//TIPO ENDERENÇO PASSAR DADOS ENDEREÇO
+        this.ativo = true;
     }
+
 
     public void atualizarInformacao(DadosAtualizacaoMedico dados){
         if(dados.nome() != null){
@@ -58,5 +61,9 @@ usada com bancos de dados que suportam autoincremento.
             this.endereco.atualizaInformacao(dados.endereco());
         }
 
+    }
+
+    public void excluir() {
+        this.ativo = false;
     }
 }

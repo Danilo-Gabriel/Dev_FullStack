@@ -30,7 +30,7 @@ public class MedicoController {
     public Page<DadosListagemMedico> medicoList(@PageableDefault(size = 10, sort = {"nome"}) Pageable paginacao){ //Anotação está passando 10 registros na paginação e ordanando por nome
 
         //FORMA ORDENADA
-        return repository.findAll(paginacao).map(DadosListagemMedico::new); // Repository JPA já tem diversas blibiotes e temos uma classe repository extedendo dela
+        return repository.findAllByAtivoTrue(paginacao).map(DadosListagemMedico::new); // Repository JPA já tem diversas blibiotes e temos uma classe repository extedendo dela
     }
 
     @PutMapping
@@ -41,6 +41,15 @@ public class MedicoController {
 
         medico.atualizarInformacao(dados);
     }
+
+    @DeleteMapping("/{id}") //Tornar a id dinamico na hora da atualização
+    @Transactional
+    public void excluir(@PathVariable Long id){ //Precisa referenciar o id rececibo para o parametro exluir Usando o @PathVariable
+        var medico = repository.getReferenceById(id); // uma variavel que busca a id na entidade classe da table em java
+        //e passa esse parametro para o metodo exluir que está inativando o perfil
+        medico.excluir();
+    }
+
 
 
 

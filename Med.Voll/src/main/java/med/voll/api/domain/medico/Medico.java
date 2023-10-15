@@ -1,12 +1,11 @@
-package med.voll.api.medico;
+package med.voll.api.domain.medico;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import med.voll.api.endereco.DadosEndereco;
-import med.voll.api.endereco.Endereco;
+import med.voll.api.domain.endereco.Endereco;
 
 @Table(name = "medicos") // REFERENCIA AO NOME DA TABELA
 @Entity(name = "Medico") // REFERENCIA AO NOME DA ENTIDADE NO JPA
@@ -15,7 +14,7 @@ import med.voll.api.endereco.Endereco;
 // permite reduzir a quantidade de código
 @AllArgsConstructor
 
-//@EqualsAndHashCode(of = "id") // comparação entre IDs intanciadas para não gerar confilto;
+@EqualsAndHashCode(of = "id") // comparação entre IDs intanciadas para não gerar confilto;
 
 
 public class Medico {

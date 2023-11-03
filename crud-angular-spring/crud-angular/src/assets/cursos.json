@@ -1,0 +1,12 @@
+[
+  { "_id": "1", "nome": "Angular", "categoria": "front-end" },
+
+  { "_id": "2", "nome": "Spring", "categoria": "Back-end" },
+
+  { "_id": "3", "nome": "Docker", "categoria": "Back-end" },
+
+  { "_id": "4", "nome": "Docker-Compose", "categoria": "Back-end" },
+
+  { "_id": "4", "nome": "Linux", "categoria": "Back-end" }
+]
+

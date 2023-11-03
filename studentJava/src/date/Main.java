@@ -1,5 +1,6 @@
 package date;
 
+import java.util.Date;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -16,6 +17,8 @@ public class Main {
         LocalDate d01 = LocalDate.now();
         LocalDateTime d02 = LocalDateTime.now();
         Instant d03 = Instant.now();
+
+        Date d12 = new Date();
 
         LocalDate d04 = LocalDate.parse("2023-07-20");
         LocalDateTime d05 = LocalDateTime.parse("2023-07-20T01:30:23");
@@ -38,6 +41,8 @@ public class Main {
         System.out.println("d08 = "+d08);
         System.out.println("d09 = "+d09);
         System.out.println("d10 = "+d10);
+        System.out.println("d11 = "+d11);
+        System.out.println("d12 = "+d12);
 
     }
 }

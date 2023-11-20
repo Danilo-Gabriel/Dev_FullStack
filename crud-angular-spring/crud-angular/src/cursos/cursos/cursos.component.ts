@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DebugElement, OnInit } from '@angular/core';
 import { catchError, Observable, of } from 'rxjs';
 
 import { Curso } from '../model/curso';
 import { CursosService } from '../services/cursos.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ErrorDialogComponent } from 'src/shared/components/error-dialog/error-dialog.component';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -16,12 +17,18 @@ export class CursosComponent implements OnInit {
 
 
   cursos$:  Observable<Curso[]>;
-  displayedColumns = ['nome', 'categoria'];
+  displayedColumns = ['nome', 'categoria','actions' ];
 
 
 
 
-  constructor(private cursosService: CursosService, public dialog: MatDialog){
+
+
+
+  constructor(
+     private cursosService: CursosService,
+     public dialog: MatDialog,
+     private router: Router){
 
 
     this.cursos$= this.cursosService.list()
@@ -41,6 +48,12 @@ export class CursosComponent implements OnInit {
     this.dialog.open(ErrorDialogComponent, {
      data: errorMsg
     });
+  }
+
+
+  onAdd(){
+    debugger
+    this.router.navigate(['cursos/new']);
   }
 
 

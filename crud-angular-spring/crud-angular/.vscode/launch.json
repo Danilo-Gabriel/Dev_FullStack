@@ -3,6 +3,13 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "type": "java",
+      "name": "CrudSpringApplication",
+      "request": "launch",
+      "mainClass": "com.nascimento.crudspring.CrudSpringApplication",
+      "projectName": "crud-spring"
+    },
+    {
       "name": "ng serve",
       "type": "chrome",
       "request": "launch",

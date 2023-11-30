@@ -22,7 +22,8 @@ public class Curso {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  @JsonProperty("_id")
+
+  @JsonProperty("_id") // estudar sobre: a principio para não criar DTO os para mudar nomes
   private Long id;
 
 

@@ -5,8 +5,8 @@ import { CursosFormComponent } from 'src/cursos/cursos-form/cursos-form.componen
 
 const routes: Routes = [
   {path:'', component:CursosComponent},
-  
-  {path:'new', component:CursosFormComponent}
+
+  {path:'cursos/new', component:CursosFormComponent}
 ];
 
 @NgModule({

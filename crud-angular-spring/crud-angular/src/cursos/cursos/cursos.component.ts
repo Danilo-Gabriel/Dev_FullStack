@@ -5,7 +5,7 @@ import { Curso } from '../model/curso';
 import { CursosService } from '../services/cursos.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ErrorDialogComponent } from 'src/shared/components/error-dialog/error-dialog.component';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -28,7 +28,8 @@ export class CursosComponent implements OnInit {
   constructor(
      private cursosService: CursosService,
      public dialog: MatDialog,
-     private router: Router){
+     private router: Router,
+     private route : ActivatedRoute){
 
 
     this.cursos$= this.cursosService.list()
@@ -52,8 +53,8 @@ export class CursosComponent implements OnInit {
 
 
   onAdd(){
-    debugger
-    this.router.navigate(['cursos/new']);
+
+    this.router.navigate(['cursos/new'], {relativeTo: this.route});
   }
 
 

@@ -5,6 +5,7 @@ import { SharedModule } from 'src/shared/shared.module';
 
 import { CursosRoutingModule } from './cursos-routing.module';
 import { CursosComponent } from './cursos/cursos.component';
+import { CursosListComponent } from './cursos-list/cursos-list.component';
 
 
 
@@ -12,7 +13,8 @@ import { CursosComponent } from './cursos/cursos.component';
 
 @NgModule({
   declarations: [
-    CursosComponent
+    CursosComponent,
+    CursosListComponent
   ],
   imports: [
     CommonModule,

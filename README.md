@@ -31,7 +31,7 @@ TECNOLOGIAS UTILIZADAS
 Treinamento continuo dos principais fundamentos da linguagem de programação JAVA 
 
 
-# Student
-
+# StudentSpring 
+Treinamento utilizando o Spring, Labmda e Streams.
 
   

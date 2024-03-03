@@ -2,6 +2,7 @@
 <mat-card>
   <mat-toolbar color="primary">Lista de Cursos</mat-toolbar>
 
+
   <div *ngIf="cursos$ | async as cursos; else loading">
 
     <table mat-table [dataSource]="cursos" class="mat-elevation-z8">
@@ -20,9 +21,9 @@
         </td>
       </ng-container>
 
-         <!-- Categoria Column -->
+
          <ng-container matColumnDef="actions">
-          <mat-header-cell *matHeaderCellDef>
+          <mat-header-cell *matHeaderCellDef="actions">
 
             <button (click)="onAdd()" color="accent" aria-label="Adicionar um curso">
               <mat-icon>add</mat-icon>
@@ -33,12 +34,12 @@
 
           <mat-cell *matCellDef="let curso">
 
-            <button color="primary" aria-label="Editar Curso">
-              <mat-icon (click)="onAdd()">edit</mat-icon>
+            <button  (click)="onAdd()"mat-raised-button aria-label="Editar Curso">
+              <mat-icon>edit</mat-icon>
             </button>
 
             <button color="primary" aria-label="Remover Curso">
-              <mat-icon (click)="onAdd()">delete</mat-icon>
+              <mat-icon >delete</mat-icon>
             </button>
 
 

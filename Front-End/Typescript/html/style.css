@@ -1,0 +1,24 @@
+
+
+body{
+    background-color: black;
+    color: white;
+}
+
+strong{
+    color: blue;
+}
+
+a{
+    border: 1px solid white;
+    color: white;
+}
+span{
+    /*padding é espaçamento interno de 10 px
+    border é largura do tipo solida e cor
+    cor do texto 
+    */
+    color: white;
+    border: 1px solid #22D4FD; 
+    padding: 10px;
+}

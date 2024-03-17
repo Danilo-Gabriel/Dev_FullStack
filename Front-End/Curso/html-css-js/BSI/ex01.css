@@ -1,0 +1,12 @@
+body{
+    background-color: rgb(228, 158, 158);
+    
+}
+
+.titulo-destaque{
+    color: green;
+}
+
+strong{
+    color: blue;
+}

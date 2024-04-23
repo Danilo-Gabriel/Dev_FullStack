@@ -69,7 +69,7 @@ class ProductService{
 
 	private void simulateLatency(){
 		try {
-			long time = 1000L;
+			long time = 2500L;
 			Thread.sleep(time);
 		} catch (InterruptedException e) {
 			throw new IllegalStateException(e);

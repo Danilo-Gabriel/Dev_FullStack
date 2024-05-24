@@ -1,4 +1,4 @@
-package br.com.alura;
+package org.init;
 
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Test;

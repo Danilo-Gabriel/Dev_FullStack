@@ -1,4 +1,4 @@
-package org.init.dto;
+package org.init.rest.dto;
 
 public class CreateUserResquest {
 

@@ -1,16 +1,16 @@
 package org.init.rest;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import io.quarkus.hibernate.orm.panache.PanacheQuery;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Valid;
 import jakarta.validation.Validator;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import org.init.domain.model.User;
 import org.init.domain.repository.UserRepository;
-import org.init.rest.dto.CreateUserResquest;
+import org.init.rest.dto.CreateUserRequest;
 
 import jakarta.ws.rs.core.Response;
 
@@ -26,6 +26,8 @@ public class UserResource {
 
     @Inject
     private UserRepository repository;
+
+    @Inject
     private Validator validator;
 
 //    @Inject
@@ -37,9 +39,20 @@ public class UserResource {
 
     @POST
     @Transactional
-    public Response createUser(CreateUserResquest dados){
+    public Response createUser(CreateUserRequest dados){
         try {
-            Set<ConstraintViolation<CreateUserResquest>> violations = validator.validate(dados);
+            //SET para armazenar as violações, para ser tratada em minha maneira!
+            Set<ConstraintViolation<CreateUserRequest>> violations = validator.validate(dados);
+            if(!violations.isEmpty()){
+                StringBuilder sb = new StringBuilder();
+                for (ConstraintViolation<CreateUserRequest> violation : violations) {
+                    sb.append(violation.getMessage()).append("\n");
+                }
+                return Response.status(Response.Status.BAD_REQUEST)
+                        .entity(sb.toString())
+                        .build();
+            }
+
             User user = new User();
             user.setName(dados.getName());
             user.setAge(dados.getAge());
@@ -48,17 +61,23 @@ public class UserResource {
 
             return Response.status(Response.Status.CREATED).build();
         }catch (Exception e) {
+            System.out.println(e.getMessage());
             return Response.status(Response.Status.BAD_REQUEST).build();
         }
     }
 
     @GET
     public Response listAllUser(){
-        PanacheQuery<User> query = repository.findAll();
-       // User.findAll();
-        return Response.ok(query.list()).build();
-    }
 
+        try {
+            PanacheQuery<User> query = repository.findAll();
+            // User.findAll();
+            return Response.ok(query.list()).build();
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        }
+    }
 
     @DELETE
     @Transactional
@@ -68,10 +87,11 @@ public class UserResource {
             User user = repository.findById(id);
             if(user != null){
                 repository.delete(user);
-                return Response.status(Response.Status.OK).build();
+                return Response.status(Response.Status.NO_CONTENT).build();
             }
                 return  Response.status(Response.Status.NOT_FOUND).build();
         }catch (Exception e){
+            System.out.println(e.getMessage());
             return Response.status(Response.Status.BAD_REQUEST).build();
         }
     }
@@ -79,7 +99,7 @@ public class UserResource {
     @PUT
     @Transactional
     @Path("{id}")
-    public  Response updateUser(@PathParam("id") Long id, CreateUserResquest dados){
+    public  Response updateUser(@PathParam("id") Long id, CreateUserRequest dados){
         try {
             User user = repository.findById(id);
             if(user != null){
@@ -91,7 +111,7 @@ public class UserResource {
             return  Response.status(Response.Status.NOT_FOUND).build();
 
         }catch (Exception e){
-
+            System.out.println(e.getMessage());
             return Response.status(Response.Status.BAD_REQUEST).build();
         }
     }

@@ -9,8 +9,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "users")
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 //@EqualsAndHashCode

@@ -5,7 +5,6 @@ package org.init.domain.model;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.util.Objects;
 
 @Entity

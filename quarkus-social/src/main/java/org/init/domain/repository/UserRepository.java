@@ -7,4 +7,6 @@ import org.init.domain.model.User;
 @ApplicationScoped
 public class UserRepository implements PanacheRepository<User> {
 
+
+
 }

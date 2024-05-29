@@ -10,6 +10,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.init.domain.model.Post;
 import org.init.domain.model.User;
+import org.init.domain.repository.FollowersRepository;
 import org.init.domain.repository.PostRepository;
 import org.init.domain.repository.UserRepository;
 import org.init.rest.dto.CreatePostRequest;
@@ -30,6 +31,9 @@ public class PostResource {
 
     @Inject
     PostRepository repository;
+
+    @Inject
+    FollowersRepository followersRepository;
 
     @POST
     @Transactional
@@ -55,13 +59,36 @@ public class PostResource {
     }
 
     @GET
-    public Response listPost(@PathParam("userId") Long id){
+    public Response listPost(
+            @HeaderParam("followerId") Long followerId,
+            @PathParam("userId") Long id){
 
         try {
             User user = userRepository.findById(id);
             if(user == null){
                 return Response.status(Response.Status.NOT_FOUND).build();
             }
+
+            if(followerId == null){
+                return Response.status(Response.Status.BAD_REQUEST).entity("Você esqueceu do header").build();
+            }
+
+            User follower = userRepository.findById(followerId);
+
+            if(follower == null){
+                return Response.status(Response.Status.BAD_REQUEST)
+                        .entity("Você esqueceu do header")
+                        .build();
+            }
+
+
+            boolean follows = followersRepository.follows(follower, user);
+            if(!follows){
+                return Response.status(Response.Status.FORBIDDEN)
+                        .entity("Sem autenticação")
+                        .build();
+            }
+
             PanacheQuery query = repository.find("user", Sort.by("dataTime", Sort.Direction.Descending), user);
             List<Post> list = query.list();
 

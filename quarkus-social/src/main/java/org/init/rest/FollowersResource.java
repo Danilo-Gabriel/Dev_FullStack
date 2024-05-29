@@ -6,13 +6,16 @@ import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import org.init.domain.model.Followers;
-import org.init.domain.model.User;
+import org.init.domain.model.Follower;
 import org.init.domain.repository.FollowersRepository;
 import org.init.domain.repository.UserRepository;
-import org.init.rest.dto.CreateFollowersRequest;
+import org.init.rest.dto.FollowerRequest;
+import org.init.rest.dto.FollowerResponse;
+import org.init.rest.dto.FollowersPerUserResponse;
 
-@Path("/users/{userId}/followers")
+import java.util.stream.Collectors;
+
+@Path("/users/{userId}/follower")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class FollowersResource {
@@ -25,44 +28,70 @@ public class FollowersResource {
     private UserRepository userRepository;
 
 
-    @POST
-    public Response createFollowers(){
-        try{
-
-
-            return Response.ok().build();
-        }catch (Exception e){
-            return Response.status(Response.Status.BAD_REQUEST).build();
-        }
-    }
-
-    @GET
-    public Response listFollowers(){
-        try {
-            return Response.ok().build();
-        }catch (Exception e){
-            return Response.status(Response.Status.BAD_REQUEST).build();
-        }
-    }
-
     @PUT
     @Transactional
     public Response followUser(
-            @PathParam("userId") Long id, CreateFollowersRequest dados){
+            @PathParam("userId") Long userId, FollowerRequest request){
 
-        User user = userRepository.findById(id);
+        if(userId.equals(request.getFollowerId())){
+            return Response.status(Response.Status.CONFLICT)
+                    .entity("You can't follow yourself")
+                    .build();
+        }
+
+        var user = userRepository.findById(userId);
         if(user == null){
             return Response.status(Response.Status.NOT_FOUND).build();
         }
 
-        User follower =  userRepository.findById(dados.getFollowersId());
-        Followers entity = new Followers();
-        entity.setUser(user);
-        entity.setFollowers(follower);
+        var follower = userRepository.findById(request.getFollowerId());
+        boolean follows = repository.follows(follower, user);
 
-        repository.persist(entity);
+        if(!follows){
+            var entity = new Follower();
+            entity.setUser(user);
+            entity.setFollower(follower);
+
+            repository.persist(entity);
+        }
+
+        return Response.status(Response.Status.NO_CONTENT).build();
+
+    }
+
+    @GET
+    public Response listFollowers(
+            @PathParam("userId") Long userId){
+
+        var user = userRepository.findById(userId);
+        if(user == null){
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+
+        var list = repository.findByUser(userId);
+        FollowersPerUserResponse responseObject = new FollowersPerUserResponse();
+        responseObject.setFollowersCount(list.size());
+
+        var followerList = list.stream()
+                .map(FollowerResponse::new )
+                .collect(Collectors.toList());
+
+        responseObject.setContent(followerList);
+        return Response.ok(responseObject).build();
+    }
+
+    @DELETE
+    @Transactional
+    public Response unfollowUser(
+            @PathParam("userId") Long userId,
+            @QueryParam("followerId")  Long followerId ){
+        var user = userRepository.findById(userId);
+        if(user == null){
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+
+        repository.deleteByFollowerAndUser(followerId, userId);
 
         return Response.status(Response.Status.NO_CONTENT).build();
     }
-
 }

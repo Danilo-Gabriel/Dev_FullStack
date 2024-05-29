@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "followers")
-public class Followers {
+public class Follower {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,8 +18,8 @@ public class Followers {
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "followers_id")
-    private User followers;
+    @JoinColumn(name = "follower_id")
+    private User follower;
 
 
 }
